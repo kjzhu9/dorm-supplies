@@ -4,14 +4,21 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     //change these to dorm-supplies specs
     email: { type: String, unique: true },
-    hash: String,
+    password: String,
     name: String,
-    phoneProvider: String,
-    phoneNumber: String,
-    preferences: [String],
+    isAdmin: Boolean, 
+    address: String,
     classYear: Number,
-    isBusiness: Boolean,
-    isAdmin: Boolean
+    orders: [{
+      items: [{
+        itemId: String,
+        quantity: Number,
+        price: Number
+      }],
+      purchasedDate: Date,
+      delivereddate: Date,
+      isPaid: Boolean
+    }]
   },
   {
     toObject: { getters: true },
@@ -25,3 +32,4 @@ const userSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
